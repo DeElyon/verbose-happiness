@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wheel of Creation with Spin</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .wheel {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 10px solid #333;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1); /* Ease-out spin effect */
+        }
+
+        .wheel .segment {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            clip-path: polygon(100% 0, 0 100%, 100% 100%);
+            transform-origin: 100% 100%;
+        }
+
+        /* Creating multiple segments and rotating them */
+        .wheel .segment:nth-child(1) { background-color: #ff6f61; transform: rotate(0deg); }
+        .wheel .segment:nth-child(2) { background-color: #f7b733; transform: rotate(60deg); }
+        .wheel .segment:nth-child(3) { background-color: #45aaf2; transform: rotate(120deg); }
+        .wheel .segment:nth-child(4) { background-color: #fd9644; transform: rotate(180deg); }
+        .wheel .segment:nth-child(5) { background-color: #26de81; transform: rotate(240deg); }
+        .wheel .segment:nth-child(6) { background-color: #fc5c65; transform: rotate(300deg); }
+
+        .wheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
+            border-radius: 50%;
+            border: 5px solid #333;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .spin-btn {
+            position: absolute;
+            top: 80%;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .spin-btn:active {
+            box-shadow: none;
+            transform: translateY(2px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wheel">
+        <div class="segment"></div>
+        <div class="segment"></div>
+        <div class="segment"></div>
+        <div class="segment"></div>
+        <div class="segment"></div>
+        <div class="segment"></div>
+        <div class="wheel-center"></div>
+    </div>
+    <button class="spin-btn">Spin</button>
+
+    <script>
+        const wheel = document.querySelector('.wheel');
+        const spinBtn = document.querySelector('.spin-btn');
+        let currentRotation = 0;
+
+        spinBtn.addEventListener('click', () => {
+            const randomRotation = Math.floor(Math.random() * 360) + 1440; // Spin for at least 4 full rotations
+            currentRotation += randomRotation;
+
+            wheel.style.transform = `rotate(${currentRotation}deg)`;
+        });
+    </script>
+
+</body>
+</html>
